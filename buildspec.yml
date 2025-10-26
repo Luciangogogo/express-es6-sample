@@ -3,21 +3,19 @@ phases:
   install:
     runtime-versions:
       nodejs: 18.x
-  pre_build:
+  build:
     commands:
       - echo "Installing dependencies..."
       - npm install
-  build:
-    commands:
       - echo "Running build..."
       - npm run build
       - echo "Build completed"
-      - ls -la dist-server/bin/
+      - ls -la dist-server/bin/         
 artifacts:
   files:
     - package.json
+    - package-lock.json                 
     - dist-server/**
-    - node_modules/**
     - public/**
     - server/**
     - .ebextensions/**
