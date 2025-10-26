@@ -1,22 +1,30 @@
 version: 0.2
+
 phases:
   install:
     runtime-versions:
       nodejs: 18.x
-  build:
+  pre_build:
     commands:
       - echo "Installing dependencies..."
       - npm install
+  build:
+    commands:
       - echo "Running build..."
       - npm run build
       - echo "Build completed"
-      - ls -la dist-server/bin/         
+      - echo "Verifying dist-server directory exists..."
+      - ls -la
+      - ls -la dist-server/ || echo "ERROR: dist-server directory not found!"
+      - ls -la dist-server/bin/ || echo "ERROR: dist-server/bin directory not found!"
+      - test -f dist-server/bin/www && echo "SUCCESS: www file found" || echo "ERROR: www file not found!"
+      
 artifacts:
   files:
     - package.json
-    - package-lock.json                 
-    - dist-server/**
-    - public/**
-    - server/**
-    - .ebextensions/**
+    - package-lock.json
+    - dist-server/**/*
+    - public/**/*
+    - node_modules/**/*
+    - .ebextensions/**/*
   base-directory: './'
