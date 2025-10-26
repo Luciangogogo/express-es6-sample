@@ -15,8 +15,8 @@ artifacts:
   files:
     - package.json
     - package-lock.json
-    - dist-server/**/*
-    - public/**/*
-    - node_modules/**/*
-    - .ebextensions/**/*
+    - dist-server/**
+    - public/**
+    - node_modules/**
+    - .ebextensions/**
   base-directory: './'
